@@ -440,6 +440,7 @@ class App(NSObject):
 
       presentController = self.navigationClass.alloc(
       ).initWithRootViewController_(self.viewController)
+      print('p')
       presentController.setModalPresentationStyle_(style)
 
       self.sharedViewController.presentViewController(
