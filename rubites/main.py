@@ -82,7 +82,7 @@ NSSetUncaughtExceptionHandler(_handler)
 #############################################################
 # --- lifeCycle
 #############################################################
-#loop = RubiconEventLoop()
+loop = RubiconEventLoop()
 
 #############################################################
 # --- mainThread
@@ -401,11 +401,13 @@ class App(NSObject):
 
     next(sharedScene for _scene in iter(objectEnumerator.nextObject, None)
          if (sharedScene := _scene).activationState == 0)
-
+    '''
     sceneWindow = sharedScene.keyWindow if (
       _delegate := sharedScene.delegate) is None else _delegate.window
+    '''
 
-    self.sharedViewController = sceneWindow.rootViewController
+    #self.sharedViewController = sceneWindow.rootViewController
+    self.sharedViewController = sharedScene.keyWindow.rootViewController
 
     return self
 
@@ -460,8 +462,6 @@ if __name__ == '__main__':
   presentation_style = 1
 
   app = App.alloc().initWithViewController_(main_vc)
-  print(app.sharedViewController)
-  '''
   app.presentWithStyle_(presentation_style)
   print('--- end ---')
 
@@ -472,4 +472,4 @@ if __name__ == '__main__':
   except Exception as e:
     print('--- collect: error')
     print(f'{e}')
-  '''
+
